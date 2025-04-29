@@ -2,12 +2,21 @@
 
 const btnAdicionarTarefa = document.querySelector('.app__button--add-task')
 const formAdicionarTarefa = document.querySelector('.app__form-add-task')
+
 const textarea = document.querySelector('.app__form-textarea')
+
 const ulTarefas = document.querySelector('.app__section-task-list')
 const tarefas = JSON.parse(localStorage.getItem('tarefas')) || []
 
+const btnCancelarTarefa = document.querySelector('.app__form-footer__button--cancel')
+
 function atualizarTarefas () {
     localStorage.setItem('tarefas' , JSON.stringify(tarefas)) //atualiza a descrição da tarefa no localStore
+}
+
+function cancelarTarefa() {
+    textarea.value= ''
+    formAdicionarTarefa.classList.add('hidden')
 }
 
 btnAdicionarTarefa.addEventListener('click', () => {
@@ -23,7 +32,7 @@ formAdicionarTarefa.addEventListener('submit', (evento) => {
     const elementoTarefa = criarElementoTarefa(tarefa)
     ulTarefas.append(elementoTarefa)
     localStorage.setItem('tarefas', JSON.stringify(tarefas))
-    tarefa.velue = ''
+    tarefa.value = ''
     formAdicionarTarefa.classList.add('hidden')
 })
 
@@ -45,30 +54,36 @@ function criarElementoTarefa(tarefa) {
     paragrafo.textContent = tarefa.descricao
     paragrafo.classList.add('app__section-task-list-item-description')
 
-    const botao = document.createElement('button')
-
-    botao.onclick = () => {
+    const botaoEditar = document.createElement('button')
+    botaoEditar.addEventListener('click', () => {
         const novaDescricao = prompt('Qual é o novo nome da tarefa?')
-        paragrafo.textContent = novaDescricao
-    }
+        if (novaDescricao && novaDescricao.trim() !== '') {
+            paragrafo.textContent = novaDescricao
+            tarefa.descricao = novaDescricao // Atualiza o objeto tarefa
+            atualizarTarefas() // Atualiza o localStorage
+        } else {
+            alert('Digite um valor válido!')
+        }
+    })
 
     const imagemBotao = document.createElement('img')
     imagemBotao.setAttribute('src', '/Fokus-projeto-base/imagens/edit.png')
-    botao.append(imagemBotao)
-    botao.classList.add('app_button-edit')
-
-    
+    botaoEditar.append(imagemBotao)
+    botaoEditar.classList.add('app_button-edit')
 
     li.append(svg)
     li.append(paragrafo)
-    li.append(botao)
+    li.append(botaoEditar)
 
     return li
 }
+
 
 tarefas.forEach(tarefa => {
     const elementoTarefa = criarElementoTarefa(tarefa)
     ulTarefas.append(elementoTarefa)
 
 });
+
+btnCancelarTarefa.addEventListener('click', cancelarTarefa)
 
