@@ -7,6 +7,7 @@ const textarea = document.querySelector('.app__form-textarea')
 
 const ulTarefas = document.querySelector('.app__section-task-list')
 const tarefas = JSON.parse(localStorage.getItem('tarefas')) || []
+const paragrafoDescricaoTarefa = document.querySelector('.app__section-active-task-description')
 
 const btnCancelarTarefa = document.querySelector('.app__form-footer__button--cancel')
 
@@ -74,6 +75,11 @@ function criarElementoTarefa(tarefa) {
     li.append(svg)
     li.append(paragrafo)
     li.append(botaoEditar)
+
+    li.onclick = () => {
+        paragrafoDescricaoTarefa.textContent = tarefa.descricao
+        li.classList.add('app__section-task-list-item-active')
+    }
 
     return li
 }
