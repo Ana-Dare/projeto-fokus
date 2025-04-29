@@ -20,7 +20,7 @@ const iniciarOuPausarBtIcone = document.querySelector('.app__card-primary-butto-
 const tempoNaTela = document.querySelector('#timer');
 
 focoBt.addEventListener('click', () => {
-    tempoDecorridoEmSegundos = 10
+    tempoDecorridoEmSegundos = 2
     alterarContexto('foco')
     focoBt.classList.add('active')
 })
@@ -117,3 +117,4 @@ function mostrarTempo() {
     tempoNaTela.innerHTML = `${tempoFormatado}`
 }
 mostrarTempo()
+
