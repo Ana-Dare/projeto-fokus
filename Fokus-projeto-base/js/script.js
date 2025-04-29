@@ -20,7 +20,7 @@ const iniciarOuPausarBtIcone = document.querySelector('.app__card-primary-butto-
 const tempoNaTela = document.querySelector('#timer');
 
 focoBt.addEventListener('click', () => {
-    tempoDecorridoEmSegundos = 1500
+    tempoDecorridoEmSegundos = 10
     alterarContexto('foco')
     focoBt.classList.add('active')
 })
@@ -90,6 +90,11 @@ const contagemRegressiva = () => {
     if(tempoDecorridoEmSegundos <= 0){
        //audioTempoFinalizado.play() 
         alert('Tempo finalizado!');
+        const focoAtivo = html.getAttribute('data-contexto') == 'foco'
+           if (focoAtivo) {
+            const evento = new CustomEvent('FocoFinalizado')
+            document.dispatchEvent(evento)
+        }
         zerar()
         return
     }
