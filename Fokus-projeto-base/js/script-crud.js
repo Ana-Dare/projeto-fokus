@@ -32,6 +32,14 @@ const atualizarUI = () => {
         </svg>
         `;
     const ulTarefas = document.querySelector('.app__section-task-list');
+    const formAdicionarTarefa = document.querySelector('.app__form-add-task');
+    const btnAdicionarTarefa = document.querySelector('.app__button--add-task');
+    if (!btnAdicionarTarefa) {
+        throw Error("O elemento btnAdicionarTarefa não foi encontrado.");
+    }
+    btnAdicionarTarefa.onclick = () => {
+        formAdicionarTarefa?.classList.toggle('hidden');
+    };
     if (ulTarefas) {
         ulTarefas.innerHTML = '';
     }
@@ -58,3 +66,4 @@ const atualizarUI = () => {
         ulTarefas?.appendChild(li);
     });
 };
+atualizarUI();
