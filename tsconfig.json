@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "target": "ES2022", // para qual versão js ele deve copilar.
+        "outDir": "./Fokus-projeto-base/js", // destino dos arquivos compilados.
+        "noEmitOnError": true,
+        "experimentalDecorators": true  // se um erro for encontrado não gerar arquivo.
+    },
+    "include": [
+        "./Fokus-projeto-base/src" // onde procurar arquivos ts.
+    ]
+}
