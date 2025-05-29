@@ -87,15 +87,23 @@ function iniciarOuPausar() {
 }
 
 const contagemRegressiva = () => {
-    if(tempoDecorridoEmSegundos <= 0){
-       //audioTempoFinalizado.play() 
-        alert('Tempo finalizado!');
-        const focoAtivo = html.getAttribute('data-contexto') == 'foco'
-           if (focoAtivo) {
-            const evento = new CustomEvent('FocoFinalizado')
-            document.dispatchEvent(evento)
-        }
+    if (tempoDecorridoEmSegundos <= 0) {
         zerar()
+        const focoAtivo = html.getAttribute('data-contexto') === 'foco'
+        if (focoAtivo) {            
+            var event = new CustomEvent("TarefaFinalizada", {
+                detail: {
+                    message: "A tarefa foi concluída com sucesso!",
+                    time: new Date(),
+                },
+                bubbles: true,
+                cancelable: true
+            });
+            document.dispatchEvent(event);
+            tempoDecorridoEmSegundos = 25
+            mostrarTempo()
+        }
+
         return
     }
     tempoDecorridoEmSegundos -= 1

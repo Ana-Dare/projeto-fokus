@@ -175,7 +175,6 @@ const atualizarUI = () => {
         li.appendChild(button)
 
         li.addEventListener('click', () => {
-            console.log('A tarefa foi clicada', tarefa)
             estadoInicial = selecionarTarefa(estadoInicial, tarefa)
             atualizarUI()
         })
@@ -190,5 +189,12 @@ const atualizarUI = () => {
         ulTarefas?.appendChild(li)
     })
 }
+
+document.addEventListener('TarefaFinalizada' , () => {
+    if(estadoInicial.tarefaSelecionada) {
+        estadoInicial.tarefaSelecionada.concluida = true
+        atualizarUI()
+    }
+})
 
 atualizarUI()
