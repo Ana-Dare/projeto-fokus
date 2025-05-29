@@ -79,6 +79,11 @@ const atualizarUI = () => {
         li.appendChild(svgIcon);
         li.appendChild(paragraph);
         li.appendChild(button);
+        li.addEventListener('click', () => {
+            console.log('tarefa clicada', tarefa);
+            estadoInicial = selecionaeTarefa(estadoInicial, tarefa);
+            atualizarUI();
+        });
         ulTarefas?.appendChild(li);
     });
 };
